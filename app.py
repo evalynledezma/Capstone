@@ -13,6 +13,8 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + \
 db = SQLAlchemy(app)
 ma = Marshmallow(app)
 
+# test to show commit vscode ui
+
 CORS(app)
 
 
