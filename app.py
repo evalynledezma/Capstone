@@ -22,15 +22,17 @@ class Item(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, nullable=False)
     price = db.Column(db.Float, nullable=False)
+    url = db.Column(db.String, nullable=False)
 
-    def __init__(self, name, price):
+    def __init__(self, name, price, url):
         self.name = name
         self.price = price
+        self.url = url
 
 
 class ItemSchema(ma.Schema):
     class Meta:
-        fields = ("id", "name", "price")
+        fields = ("id", "name", "price", "url")
 
 
 item_schema = ItemSchema()
@@ -40,8 +42,9 @@ items_schema = ItemSchema(many=True)
 def add_item():
     name = request.json.get("name")
     price = request.json.get("price")
+    url = request.json.get("url")
 
-    record = Item(name, price)
+    record = Item(name, price, url)
     db.session.add(record)
     db.session.commit()
 
